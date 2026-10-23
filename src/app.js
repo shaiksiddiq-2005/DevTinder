@@ -1,2 +1,6 @@
-console.log("Starting of the project!");
-console.log("Dev Tinder");
+const express = require("express");
+
+const app = express();
+
+app.listen(3000);
+
