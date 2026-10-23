@@ -3,30 +3,21 @@ const express = require("express");
 const app = express();
 
 
-app.use("/hello", (req, res) => {
-    res.send("Hello from the server!");
+
+app.get("/user", (req, res)=>{
+    res.send( { name: "siddiq", age: 22, college: "raghu" });  // it was giving the data to clients.
 });
 
-// This won't work --> because there was a problem with routhing.. 
-app.use("/hello/2", (req, res) => {
-    res.send("222222222222222");
+app.post("/user", (req,res)=>{
+    res.send("The data is saved inside the database!");  // it was receiving the data and saved at Databases.
+})
+
+app.delete("/user", (req, res)=>{
+    res.send("The data has been deleted!"); // it was used to delete the data from the database.
 });
 
-
-
-
-app.use("/test", (req, res)=>{
-    res.send("Hello from testing....");
-});
-
-app.use("/Hey", (req, res)=>{
-    res.send("Hey from server....");
-});
-
-
-// The order of Routing is very important!
-app.use("/", (req, res)=>{
-    res.send("Welcome....");  
+app.patch("/user", (req, res)=>{
+    res.send("The data has been updated!")  // it is used to update the data ibn database.
 })
 
 
