@@ -6,7 +6,8 @@ const app = express();
 
 
 app.get("/user", (req, res)=>{
-    res.send("Hello from the server");
+    // If we didn't send any respones, for the request then it goes inside the infinite loop (Sending request.........)
+     res.send("Hello from the server");
 })
 
 
