@@ -5,21 +5,21 @@ const express = require("express");
 const app = express();
 
 
-// Route Handler..   
-app.get("/user/login", (req, res)=>{
-    res.send ("user Logged in Successfully!");
+// Route Handler........
+app.get("/userData", (req, res)=>{
+    try{
+           // throw new Error ("vudciianvifagoqf");
+            res.send ("user Logged in Successfully!");
+        }
+    catch (err){
+        res.status(404).send("An error had occured!");
+    }
 });
 
-// middleware using..
-app.get ("/user/data", userAuth, (req, res, next) => {
 
-    res.send("The user data is sent!"); 
-});
 
-app.get ("/user/delete",userAuth, (req, res, next) => {
 
-    res.send("The user data is deleted!"); 
-});
+
 
 
 
