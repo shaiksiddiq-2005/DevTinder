@@ -1,19 +1,32 @@
 //Middleware, using Middleware for the Authentication process...
- 
-const express = require("express");
 
+const express = require("express");
 const app = express();
 
-app.get("/user/:id/:userName", (req, res, next)=>{
+// Middleware...
+app.use("/user", (req, res, next)=>{
 
-    const userId = req.params.id;
-    const userName = req.params.userName;
+    const tokens = "xyz";
+    const userAuth= tokens === "xyzss"; // true
 
-    res.send(` The user Name is ${userName} and userId is ${userId} `);
 
+        // True
+        if (userAuth){
+           next();    
+        }
+
+        // False
+        else {
+            res.status(401).send("unauthorized Request!");
+        }
 });
 
 
+// Route Handler..
+app.get ("/user/data", (req, res, next) => {
+
+    res.send("The user data is sent!"); 
+});
 
 app.listen(3000);
 
