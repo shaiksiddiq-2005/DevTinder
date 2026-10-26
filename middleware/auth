@@ -1,0 +1,19 @@
+const userAuth =(req, res, next)=>{
+
+    const tokens = "xyz";
+    const userAuth= tokens === "xyz"; // true
+
+
+        // True
+        if (userAuth){
+           next();    
+        }
+
+        // False
+        else {
+            res.status(401).send("unauthorized Request!");
+        }
+
+    }
+
+module.exports = {userAuth}
