@@ -1,7 +1,7 @@
-const userAuth =(req, res, next)=>{
+const userAuth = (req, res, next)=>{
 
     const tokens = "xyz";
-    const userAuth= tokens === "xyz"; // true
+    const userAuth= tokens === "xyzss"; // true
 
 
         // True

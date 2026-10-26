@@ -5,7 +5,12 @@ const express = require("express");
 const app = express();
 
 
-// Route Handler..
+// Route Handler..   
+app.get("/user/login", (req, res)=>{
+    res.send ("user Logged in Successfully!");
+});
+
+// middleware using..
 app.get ("/user/data", userAuth, (req, res, next) => {
 
     res.send("The user data is sent!"); 
