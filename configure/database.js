@@ -5,7 +5,7 @@ console.log("Hello from DB")
 const connectDB = async () => {
 
    await mongoose.connect(
-        "mongodb+srv://ShaikSiddiq:siddiqshaik@shaiksiddiq.poghlgv.mongodb.net/"
+        "mongodb+srv://ShaikSiddiq:siddiqshaik@shaiksiddiq.poghlgv.mongodb.net/devTinder"
     );
 }
 
