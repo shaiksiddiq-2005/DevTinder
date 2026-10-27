@@ -1,24 +1,28 @@
-//Middleware, using Middleware for the Authentication process...
-
-const {userAuth} = require("../middleware/auth");
 const express = require("express");
+const {connectDB } = require("../configure/database.js");
 const app = express();
 
+app.get("/data", (req,res)=>{
+    res.send("Data..................");
+})
 
-// Route Handler........
-app.get("/userData", (req, res)=>{
+connectDB()
+    .then(()=>{
+        console.log("Connection was Establised");
 
-        throw new Error ("vudciianvifagoqf");
-        res.send ("user Logged in Successfully!");
-});
+        app.listen(3000, ()=>{
+        console.log("Server is sucessfullt starts listening on the port 3000")
+        });
 
-app.get("/use", (err, req, res, next) =>{
-    if (err){
-        res.status(104).send("Error Occured!");
-    }
-});
-
-
-app.listen(3000);
+    })
+    .catch((err)=>{
+        console.log("Connection was NOT Established!!!");
+    });
 
 
+
+
+
+
+
+ 
