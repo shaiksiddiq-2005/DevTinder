@@ -48,7 +48,21 @@ app.get("/user", async (req,res)=>{
 
 });
 
+app.delete("/user", async (req, res)=>{
 
+    const userId = req.body.id;
+    const user = await User.findByIdAndDelete(userId);
+
+    if(user){
+        res.send("User deleted Successfully!!!");
+    }
+
+    else{
+        res.status(404).send("Something went wronge!!")
+    }
+
+
+});
 
 // It is used to connect the Database of the MongoDB
 connectDB()
