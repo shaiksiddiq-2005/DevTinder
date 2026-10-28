@@ -6,24 +6,15 @@ const {User} = require("./models/user.js"); // It is used to follow the structur
 
 const app = express(); // It is used to Start the Server!
 
-app.get("/data", (req,res)=>{
-    res.send("Data..................");
-});
+// It is a middleware which checks every routing because we have't mentioned sepicify route to check.
+app.use( express.json() );  // It is middleware given by the Express, which helps us to convert the JSON data ----> JS object so that we can access the JS object data.);
 
-// Sending the Data...
 app.post("/signup", async (req,res)=>{
+    console.log(req.data);   // It returns a Javascript object, the data which is recieves from the API/Postman..
 
-    const userData = {
-        firstName : "Mouli",
-        lastName : "Mathireddy",
-        age : 21,
-        gender : "Male",
-    }
-
-    const user = new User(userData);
-
+    const user = new User(req.data);
     await user.save();
-    res.send("Data has been sent successfully!!!!");
+    res.send("Data has been sent successfully!!!!"); 
     
 });
 
@@ -31,7 +22,6 @@ app.post("/signup", async (req,res)=>{
 connectDB()
     .then(()=>{
         console.log("Connection was Establised");
-
 
         // It is used to Start the listening of the server!!!
         app.listen(3000, ()=>{
