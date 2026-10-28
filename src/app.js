@@ -5,18 +5,33 @@ const {User} = require("./models/user.js");
 
 const app = express(); 
 
+
+
+//Middleware to convert JSON --> JavaScript Object
 app.use( express.json() );  
 
 
+
+// Adding Data
 app.post("/signup", async (req,res)=>{
     
-
-    const user = new User(req.body);
+    const data = req.body
+    const user = new User(data);
     await user.save();
     res.send("Data has been sent successfully!!!!"); 
     
 });
 
+// Getting user by using model.find();
+app.get("/user", async(req,res)=>{
+
+    const userEmail = req.body.email;
+    const user = await User.find({email : userEmail});
+
+    res.send(user);
+})
+
+// Getting All users data by using model.find({ });
 app.get("/feed", async (req,res)=>{
     console.log(req.body);
 
@@ -31,8 +46,8 @@ app.get("/feed", async (req,res)=>{
     
 });
 
-
-app.get("/user", async (req,res)=>{
+// getting user data bu using model.findById();
+app.get("/userById", async (req,res)=>{
    console.log(req.body._id)
  
     const userId= req.body.id; // we can pass .id --> ._id
@@ -48,6 +63,7 @@ app.get("/user", async (req,res)=>{
 
 });
 
+// Deleting a user doc, by using model.findByIdAndDelete()
 app.delete("/user", async (req, res)=>{
 
     const userId = req.body.id;
@@ -63,6 +79,19 @@ app.delete("/user", async (req, res)=>{
 
 
 });
+
+//Updating the user data by using model.findByIdAndUpdate();
+app.patch("/user", async (req, res)=>{
+    const userId = req.body.id;
+    const data = req.body;
+
+    //const user = await User.findByIdAndUpdate({_id: userId}, data); 
+    const user = await User.findByIdAndUpdate(userId, data); // Shortcut
+    
+    res.send("Data updated Successfully!!!!!!");
+})
+
+
 
 // It is used to connect the Database of the MongoDB
 connectDB()
