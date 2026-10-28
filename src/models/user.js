@@ -21,9 +21,7 @@ const userSchema = new mongoose.Schema({
     password:{
         type: String,
     },
-    college: {
-        type: String,
-    }
+
 });
 
 // Creating a Model...
