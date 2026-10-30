@@ -2,6 +2,7 @@ const express = require("express");
 
 const {connectDB } = require("../configure/database.js"); 
 const {User} = require("./models/user.js");
+const { trusted } = require("mongoose");
 
 const app = express(); 
 
@@ -86,7 +87,7 @@ app.patch("/user", async (req, res)=>{
     const data = req.body;
 
     //const user = await User.findByIdAndUpdate({_id: userId}, data); 
-    const user = await User.findByIdAndUpdate(userId, data); // Shortcut
+    const user = await User.findByIdAndUpdate(userId, data, {runValidators:true}); // Shortcut
     
     res.send("Data updated Successfully!!!!!!");
 })
