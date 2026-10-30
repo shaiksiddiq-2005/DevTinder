@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 
 // Creating Schema...
 // Schema defines how the user data should be structed in the database.
@@ -35,12 +36,20 @@ const userSchema = new mongoose.Schema({
         type: String,
         required :true,
         unique: true,
-        lowercase:true,
-        trim: true
+        validate(value){
+            if(!validator.isEmail(value) ){
+                throw new Error("Email is invalid!");
+            }
+        }
     },
     password:{
         type: String,
         required : true,
+        validate(value){
+            if(!validator.isStrongPassword(value) ){
+                throw new Error("Email is invalid!");
+            }
+        }
     },
     about:{
         type: String,
