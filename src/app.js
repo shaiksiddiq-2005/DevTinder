@@ -89,12 +89,17 @@ app.patch("/user/:userId", async (req, res)=>{
         const userId = req.params?.userId; // BY USING THE PARAMS WE CAN FETCH THE USERID FROM THE REQUEST URL 
         const data = req.body;
 
+        // The list of allowed property from the userSchema for the updation..
         const AllowedUpdates = ["skills", "age", "gender", "about", "password"];
-
         const isUpdateAllowed = Object.keys(data).every((x)=> AllowedUpdates.includes(x));
 
+        // To avoid important portion NOT be to be updated!
         if(!isUpdateAllowed){
             throw new Error ("Update NOT allowed!");
+        }
+        // Too avoid too many skills 
+        if (req.body.skills.length > 10){
+            throw new Error ("Skills must LessThan 10")
         }
 
         
