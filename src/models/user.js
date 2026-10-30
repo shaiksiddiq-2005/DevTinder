@@ -47,7 +47,8 @@ const userSchema = new mongoose.Schema({
         default: "Heyy Thereeeee"
     },
     skills:{
-        type:[String]
+        type:[String],
+        maxLength : 10
     }
 
 },

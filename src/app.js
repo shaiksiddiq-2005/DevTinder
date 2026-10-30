@@ -82,15 +82,33 @@ app.delete("/user", async (req, res)=>{
 });
 
 //Updating the user data by using model.findByIdAndUpdate();
-app.patch("/user", async (req, res)=>{
-    const userId = req.body.id;
-    const data = req.body;
+app.patch("/user/:userId", async (req, res)=>{ 
 
-    //const user = await User.findByIdAndUpdate({_id: userId}, data); 
-    const user = await User.findByIdAndUpdate(userId, data, {runValidators:true}); // Shortcut
-    
-    res.send("Data updated Successfully!!!!!!");
-})
+    try{
+        // API validation...
+        const userId = req.params?.userId; // BY USING THE PARAMS WE CAN FETCH THE USERID FROM THE REQUEST URL 
+        const data = req.body;
+
+        const AllowedUpdates = ["skills", "age", "gender", "about", "password"];
+
+        const isUpdateAllowed = Object.keys(data).every((x)=> AllowedUpdates.includes(x));
+
+        if(!isUpdateAllowed){
+            throw new Error ("Update NOT allowed!");
+        }
+
+        
+        //const user = await User.findByIdAndUpdate({_id: userId}, data); 
+        const user = await User.findByIdAndUpdate({_id: userId}, data, {runValidators:true}); // Shortcut
+        
+        res.send("Data updated Successfully!!!!!!");
+    }
+
+    catch (err){
+        res.status(404).send("UPDATE WAS FAILED :" + err.message);
+
+    }
+});
 
 
 
